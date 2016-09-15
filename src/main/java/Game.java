@@ -29,7 +29,9 @@ public class Game{
   public void removeValuesNotMatched(CardValue value){
     mValuesNotMatched.remove(value);
   }
-
+  public int getTurn(){
+    return mTurn;
+  }
   public boolean guess(int player,CardValue value){
     boolean guess = false;
     List<Card> foundCards = new ArrayList<Card>();
@@ -41,13 +43,26 @@ public class Game{
       }
     }
     for(Card card : foundCards){
-        mPlayerList.get(player).removeCard(card);
+      mPlayerList.get(player).removeCard(card);
+    }
+    if(guess){
+      endOfCorrectGuess();
+    }
+    else{
+      endOfIncorrectGuess();
     }
     return guess;
   }
   public void endOfCorrectGuess(){
-    CardValue value = getPlayerList().get(mTurn).checkHand();
-    mValuesNotMatched.remove(value);
+    List<Card> foundCards = getPlayerList().get(mTurn).checkHand();
+    for(Card cardCheck : foundCards){
+      System.out.println(cardCheck.getValue() + " of " + cardCheck.getSuit());
+    }
+    System.out.println("we found");
+    for(Card card:foundCards){
+      mPlayerList.get(mTurn).removeCard(card);
+    }
+    //mValuesNotMatched.remove(value);
   }
   public void endOfIncorrectGuess(){
     if(mDeck.size()!= 0){
@@ -56,7 +71,7 @@ public class Game{
     changeTurn();
   }
   private void changeTurn(){
-    if(mTurn - 1 < mPlayerList.size()){
+    if(mTurn + 1 < mPlayerList.size()){
       mTurn++;
     }
     else{
@@ -64,7 +79,6 @@ public class Game{
     }
   }
   private void deal(){
-    System.out.println(mPlayerList.size());
     for(Player player : mPlayerList ) {
       for (int j=0 ;j < 7 ; j++) {
         player.addCard(mDeck.remove(0));
@@ -76,7 +90,6 @@ public class Game{
     for(CardValue value : CardValue.values()){
       mValuesNotMatched.add(value);
     }
-    System.out.println(mValuesNotMatched);
     for (Suit suit : Suit.values()){
       for(CardValue cardValue : CardValue.values()){
         mDeck.add(new Card(cardValue,suit));

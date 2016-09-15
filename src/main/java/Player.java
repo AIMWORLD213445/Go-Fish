@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Player{
   private List<Card> mHand = new ArrayList<Card>();
+
   private String mName;
   public List<CardValue> mMatches = new ArrayList<CardValue>();
 
@@ -32,10 +33,11 @@ public class Player{
   public void clearHand(){
     mHand.clear();
   }
-  public CardValue checkHand(){
+  public List<Card> checkHand(){
     boolean found = false;
     Integer currentCount = 0;
     CardValue foundValue = null;
+    List<Card> foundCards = new ArrayList<Card>();
     Map<String, Object> mMap = new HashMap<String, Object>();
     for (CardValue value : CardValue.values()){
       currentCount = 0;
@@ -43,18 +45,19 @@ public class Player{
       for(Card card : mHand){
         if (value == card.getValue()){
           currentCount++;
+          System.out.println(currentCount);
           mMap.put(value.toString(),currentCount);
-          if(currentCount == 4){
+          if(currentCount == 2){
             mMatches.add(value);
             for(Suit suit : Suit.values()){
-              mHand.remove(new Card(value,suit));
+              foundCards.add(new Card(value,suit));
+              System.out.println("we got a pair");
             }
             foundValue = value;
-            return foundValue;
           }
         }
       }
     }
-    return foundValue;
+    return foundCards;
   }
 }

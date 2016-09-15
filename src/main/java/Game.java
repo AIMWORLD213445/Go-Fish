@@ -10,7 +10,7 @@ public class Game{
   private List<CardValue> mValuesNotMatched = new ArrayList<CardValue>();
   private int mTurn;
   public Game(List<String> names){
-    mTurn = 1;
+    mTurn = 0;
     for (String name : names){
       mPlayerList.add(new Player(name));
     }
@@ -29,16 +29,38 @@ public class Game{
   public void removeValuesNotMatched(CardValue value){
     mValuesNotMatched.remove(value);
   }
-  public void turn(){
-    CardValue value = getPlayerList().get(turn).checkHand();
+
+  public boolean guess(int player,CardValue value){
+    boolean guess = false;
+    List<Card> foundCards = new ArrayList<Card>();
+    for(Card card : mPlayerList.get(player).getHand()){
+      if (value == card.getValue()) {
+        mPlayerList.get(mTurn).addCard(card);
+        foundCards.add(card);
+        guess = true;
+      }
+    }
+    for(Card card : foundCards){
+        mPlayerList.get(player).removeCard(card);
+    }
+    return guess;
+  }
+  public void endOfCorrectGuess(){
+    CardValue value = getPlayerList().get(mTurn).checkHand();
     mValuesNotMatched.remove(value);
   }
+  public void endOfIncorrectGuess(){
+    if(mDeck.size()!= 0){
+      mPlayerList.get(mTurn).addCard(mDeck.remove(0));
+    }
+    changeTurn();
+  }
   private void changeTurn(){
-    if(turn < mPlayerList.size()){
-      turn++;
+    if(mTurn - 1 < mPlayerList.size()){
+      mTurn++;
     }
     else{
-      turn = 1;
+      mTurn = 0;
     }
   }
   private void deal(){

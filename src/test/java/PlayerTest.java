@@ -27,6 +27,6 @@ public class PlayerTest {
    player.addCard(new Card(CardValue.QUEEN, Suit.SPADES));
    player.addCard(new Card(CardValue.FIVE, Suit.SPADES));
    player.checkHand();
-   assertEquals(true, player.mMatches.contains(CardValue.FIVE));
+   assertEquals(true, player.getMatches().contains(CardValue.FIVE));
 }
 }

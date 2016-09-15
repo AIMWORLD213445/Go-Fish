@@ -12,19 +12,11 @@ import static spark.Spark.*;
 
 public class App{
   public static void main(String[] args) {
-    Player player = new Player("Tom");
-    player.addCard(new Card(CardValue.TWO, Suit.CLUBS));
-    player.addCard(new Card(CardValue.KING, Suit.SPADES));
-    player.addCard(new Card(CardValue.TWO, Suit.DIAMONDS));
-    player.addCard(new Card(CardValue.JACK, Suit.DIAMONDS));
-    player.addCard(new Card(CardValue.TWO, Suit.HEARTS));
-    player.addCard(new Card(CardValue.QUEEN, Suit.SPADES));
-    player.addCard(new Card(CardValue.TWO, Suit.SPADES));
-    System.out.println(player.checkHand());
+
 
     List<String> names = new ArrayList<String>();
-    names.add("tom");
-    names.add("jerry");
+    names.add("player1");
+    names.add("Player2");
     Game game = new Game(names);
     // for(Card card : game.getPlayerList().get(0).getHand()){
     //   System.out.println(card.getValue() + " of " + card.getSuit());

@@ -7,8 +7,12 @@ public class Player{
   private List<Card> mHand = new ArrayList<Card>();
   private String mName;
   public List<CardValue> mMatches = new ArrayList<CardValue>();
+
   public Player(String name){
     mName = name;
+  }
+  public List<CardValue> getMatches(){
+    return mMatches;
   }
   public List<Card> getHand(){
     return mHand;
@@ -16,11 +20,17 @@ public class Player{
   public void addCard(Card card){
     mHand.add(card);
   }
+  public void removeCard(Card card){
+    mHand.remove(card);
+  }
   public String getName(){
     return mName;
   }
   public void clearMatches(){
-      mMatches.clear();
+    mMatches.clear();
+  }
+  public void clearHand(){
+    mHand.clear();
   }
   public CardValue checkHand(){
     boolean found = false;

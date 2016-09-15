@@ -5,7 +5,7 @@ import java.util.List;
 
 public class GameTest {
  @Test
-    public void checkHand_recoginizeMatch_TWO() {
+    public void turn_recoginizeMatch_TWO() {
       List<String> names = new ArrayList<String>();
       names.add("tom");
       Game game = new Game(names);
@@ -18,7 +18,7 @@ public class GameTest {
       game.getPlayerList().get(0).addCard(new Card(CardValue.QUEEN, Suit.SPADES));
       game.getPlayerList().get(0).addCard(new Card(CardValue.FIVE, Suit.SPADES));
       game.turn();
-      assertEquals(false, game.mValuesNotMatched.contains(CardValue.FIVE));
+      assertEquals(false, game.getValuesNotMatched().contains(CardValue.FIVE));
  }
 
 }

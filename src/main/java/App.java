@@ -26,7 +26,6 @@ public class App{
     names.add("tom");
     names.add("jerry");
     Game game = new Game(names);
-    String string = Suit.CLUBS.toString();
     // for(Card card : game.getPlayerList().get(0).getHand()){
     //   System.out.println(card.getValue() + " of " + card.getSuit());
     // }

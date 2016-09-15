@@ -9,7 +9,6 @@ public class Player{
   public List<CardValue> mMatches = new ArrayList<CardValue>();
   public Player(String name){
     mName = name;
-
   }
   public List<Card> getHand(){
     return mHand;
